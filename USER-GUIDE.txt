@@ -1,0 +1,76 @@
+CHANNEL TIDEMARK USER GUIDE
+Version 1.6.1 · Joshua Dwight
+
+BUILD A PLAYLIST
+
+Open Channel Tidemark and create a channel, or use Main channel. In Playlist, click Add Item. Paste a link or pick a file in Media, then adjust the optional settings in Playback. Click Add Item in the window header to save. Errors appear below the form so you can correct the item and try again.
+
+• Media file plays a file on the server. Use Browse to pick a video or audio file.
+• Media stream URL accepts a direct HTTP or HTTPS media file or manifest, including HLS and DASH. Some webpages also publish a direct audio or video link that the app can find.
+• Internet radio accepts a direct station stream or a common M3U or PLS radio playlist. Turn on MilkDrop to visualize the station audio.
+• YouTube video accepts an individual watch, share, Shorts, or live link. Pasting a recognized URL selects the YouTube source type. Browser viewers get the original YouTube player and its normal controls, ads, and attribution. HLS viewers get a standby picture for that slot.
+• Provider player accepts supported Vimeo videos and Twitch live streams, recorded videos, or clips. The viewer runs the service’s official player.
+• External watch page opens a link on the original service. Spotify, SoundCloud, and other pages without a playable feed use this option.
+
+Set the order with Move Up and Move Down. The playlist repeats. A change to a running playlist restarts that channel.
+
+LOOK UP OR OVERRIDE A LINK TITLE
+
+Paste a URL and wait for Link metadata to show where the suggested title came from. YouTube titles, station names, media file tags, and webpage titles can all fill the title field. If the link has no title, the app suggests a name from its filename or address.
+
+Type in Playlist title to keep your own wording. A background lookup preserves what you type. Use the refresh button in Link details to look up the title again, or Use Suggested Title to switch back to the discovered title. A page without a direct media URL becomes an External watch page unless it has a supported provider player.
+
+SET WHEN AN ITEM ADVANCES
+
+Check Limit play time to reveal the maximum-seconds field. A file plays once to its end or until the limit, whichever comes first. Leave the checkbox clear to play the whole file. The playlist repeats after its last item. YouTube and Vimeo lengths appear in Link details when the provider publishes them. For YouTube, Check YouTube Embed can also read the length when the official player starts. Scheduled lengths include any YouTube start and end points. When an old provider item has no saved length, the server checks it the first time it plays. A feed or browser-only item without a detectable duration gets five minutes unless you set a different limit. Use Skip Current to advance early. The playlist highlights the active row with Now playing. Live position above the channel tabs shows elapsed time and the total when it is known.
+
+USE MILKDROP VISUALS
+
+1. Open the MilkDrop tab and choose a Rendering engine. Choose projectM for classic .milk presets, or Lactea · MilkDrop 3 for .milk2 double presets. Use Install MilkDrop 3 Support to download and test Lactea, or Install projectM for classic presets. The Lactea installer supports x86-64 Linux and needs working Vulkan and PyAV.
+2. Turn on Use MilkDrop for audio-only items. Select the built-in preset or use Import Preset to add your own. Importing a .milk2 file selects Lactea in the channel settings. You can rotate imported presets on a timer and point projectM to a folder of textures used by the presets.
+3. Click Save MilkDrop Settings. The server combines the original audio and generated frames in the HLS stream.
+4. For a specific file or stream URL, open its item editor and set Visuals to Force MilkDrop or Keep original video. Force MilkDrop uses the input's audio even if the input also carries video. Use channel setting applies MilkDrop only to audio-only sources when it is enabled for the channel.
+
+YouTube uses its own browser player. If the MilkDrop engine is unavailable, the server uses the source video or a static background. Preset and texture files remain local files. A channel backup records the choices, so include those files when migrating to a different server.
+
+WHEN YOUTUBE SAYS VIDEO UNAVAILABLE
+
+Open the channel’s viewer page. The YouTube player uses the optional start time you included in the link, or starts from the beginning. Use Play in the player when the browser blocks autoplay. Watch on YouTube opens the original video.
+
+To paste the video-only iframe, open Share → Embed → Copy on YouTube. In Add Playlist Item or Edit Playlist Item, choose Paste Embed Code…, paste the snippet, and click Use Embed Code. Check YouTube Embed opens the official player in a browser before you save and reports the result beside the link. Press Play if prompted. A check that cannot finish is inconclusive. You can check a YouTube watch, share, or embed link. For Vimeo and Twitch, use Preview Embed. Check Twitch and domain-restricted videos on the published HTTPS viewer.
+
+If the YouTube player reports an error to the viewer, Watch on YouTube replaces the player and opens the original watch page in a new tab. YouTube handles playback, ads, and account sign-in. To always open a particular item on YouTube, enter its URL and then choose External watch page as its source type. If YouTube cannot identify the page, open the shared viewer link directly in a browser that sends the site referrer. Browser privacy settings and some embedded webviews can affect that information.
+
+WATCH AS A GUEST OR SIGN IN
+
+Open the channel’s browser viewer and use the player’s own controls. YouTube, Vimeo, and Twitch can play inline when the provider allows it. Use an HTTPS viewer at least 400 pixels wide for the Twitch player. A Watch link opens the original page when the provider requires it. External watch-page items, such as Spotify and SoundCloud links, open in a new tab.
+
+Expand Provider accounts or click the sign-in link next to the current player. The service’s own sign-in page opens in a new tab where it handles your login. You can continue as a guest without signing in. If the browser does not make your login available to an embedded player, open the original watch page in the same browser. The service controls ads and subscription benefits.
+
+SHARE AND WATCH
+
+1. In Playback Options, choose the playback options visitors should see.
+2. Click Start Server. Find Browser playback, Direct HLS, and Player options page in Streaming Links above the channel tabs. Use Copy to share a link or Open to visit the playback or player options page in your browser.
+3. Visitors can play in the browser, use the HLS URL on a compatible phone or media player, download a VLC M3U playlist, or download a Kodi STRM file, depending on the channel settings. A Roku channel that accepts HLS URLs can use the HLS link. The Plex option provides an M3U feed for a separate compatible tuner bridge.
+
+The viewer link is unlisted. Anyone who receives it can pass it along. Open the Channel Settings tab to rename the channel, turn it on or off, rotate its link, or remove it. Click Save Channel Settings after editing the name or enabled state. Stop Server stops all channels.
+
+LOCAL AND PUBLIC LINKS
+
+With local networking enabled, the app displays a LAN link. Test it from another device on the same network. Use File → Network Settings to choose the port and to enter an HTTPS origin for a reverse proxy you control.
+
+For public HTTPS sharing with Tailscale, set up Tailscale and enable Funnel permission on the node first. Then start the server and click Start Public HTTPS. The app shows the address Tailscale reports. Stop Public HTTPS closes the foreground tunnel. Funnel availability and throughput depend on your Tailscale setup.
+
+For a long-running server, use the --serve command documented in the project README. The headless process reads the saved settings at startup. Restart it after making changes in the desktop editor.
+
+USE A CHANNEL WITH KIOSK STUDIO
+
+Keep Web browser enabled and copy Browser playback from Streaming Links. In Kiosk Studio, approve the browser, enable that browser's Autostart option, and paste the link into Browser URLs. Add the browser's kiosk-mode argument if supported. Check the link from the kiosk's network before deploying.
+
+The browser playback page fills the window and tries to start with sound. If autoplay is blocked, click Play fullscreen with sound. If playback is already running, click Fullscreen. The player stays fullscreen across playlist items. Press Esc to exit fullscreen. Everyone follows the server playlist. The official YouTube and Vimeo players start near the live position when a recording’s duration is known. Each viewer can see different ads or buffering delays. An external watch page plays separately from the channel. YouTube’s player may require its own Play interaction or decline to embed some videos.
+
+SAVE SETTINGS AND GET HELP
+
+File → Back Up Channels saves your channels, share keys, source paths, and network settings. Keep the backup private. File → Restore Channels reloads a saved backup. Stop the server before restoring a backup that uses a different port or network binding.
+
+File → Install in Application Menu refreshes the app's launcher. File → Install Desktop Shortcut creates or replaces the desktop shortcut. Help → About shows the author and version.
